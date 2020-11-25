@@ -31,7 +31,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                @include('partials.errors')
+
 
                 <div class="input-group mb-3">
                     <input type="email" name="email" class="form-control" placeholder="Email">

@@ -58,6 +58,70 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            الموظفين
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('add-employee') }}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>اضافه موظف جديد</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('get-supervisors')}}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>المشرفين</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('get-editors')}}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>المحررين</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('get-writers')}}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>الكتاب</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            المقالات
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('articles.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>انشاء مقال جديد</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('articles.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>عرض المقالات</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
           {{--      <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>

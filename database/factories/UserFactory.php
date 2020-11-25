@@ -33,7 +33,6 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->define(Department::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'type' => $faker->randomElement([1, 2]),    // 1=main department  2=sub-department
         'supervisor_id' => random_int(1, 5),
         'editor_id' => random_int(1, 5),
         'writer_id' => random_int(1, 5),

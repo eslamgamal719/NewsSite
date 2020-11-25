@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\Dashboard\DepartmentRequest;
 use App\Models\User;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -28,7 +29,15 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        //
+        $data = [];
+        $data['writers'] = User::whereRoleIs('writer')->get();
+        $data['editors'] = User::whereRoleIs('editor')->get();
+        $data['supervisors'] = User::whereRoleIs('supervisor')->get();
+
+        $data['parent_departs'] = Department::where('parent_id', null)->get();
+        $data['child_departs'] = Department::where('parent_id', '!=' , null)->get();
+
+        return view('dashboard.departments.create', $data);
     }
 
     /**
@@ -37,21 +46,18 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        //
+        if($request->type == '1') {
+            $request->request->add(['parent_id' => null]);
+        }
+
+        Department::create($request->except('type'));
+
+        return redirect()->route('departments.index')->with('success', 'تم اضافه القسم بنجاح');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Department $department)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +67,15 @@ class DepartmentsController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        $data = [];
+        $data['department'] = $department;
+        $data['writers'] = User::whereRoleIs('writer')->get();
+        $data['editors'] = User::whereRoleIs('editor')->get();
+        $data['supervisors'] = User::whereRoleIs('supervisor')->get();
+
+        $data['parent_departs'] = Department::where('parent_id', null)->get();
+        $data['child_departs'] = Department::where('parent_id', '!=' , null)->get();
+        return view('dashboard.departments.edit', $data);
     }
 
     /**
