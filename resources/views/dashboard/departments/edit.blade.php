@@ -12,7 +12,7 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">انشاء قسم جديد</h3>
+                                    <h3 class="card-title">تعديل القسم </h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -20,6 +20,8 @@
 
                                     @csrf
                                     @method('put')
+
+                                    <input type="hidden" value="{{ $department->id }}">
 
                                     <div class="card-body">
 
@@ -33,10 +35,10 @@
                                             <label>مشرف القسم</label>
                                             <select name="supervisor_id" class="form-control" style="width: 100%;">
                                                 @isset($supervisors)
-                                                    <option value="0">المشرفين</option>
+                                                    <option value="0"></option>
                                                     @foreach($supervisors as $supervisor)
                                                          <option value="{{ $supervisor->id }}"
-                                                        {{ $supervisor->id == $department->supervisor_id ? "selected" : '' }}
+                                                        {{ $supervisor->id === $department->supervisor_id ? "selected" : '' }}
                                                          >{{ $supervisor->name }}</option>
                                                     @endforeach
                                                 @endisset
@@ -47,7 +49,7 @@
                                             <label>محرر القسم</label>
                                             <select name="editor_id" class="form-control" style="width: 100%;">
                                                 @isset($editors)
-                                                    <option value="0">المحررين</option>
+                                                    <option value="0"></option>
                                                 @foreach($editors as $editor)
                                                         <option value="{{ $editor->id }}"
                                                        {{ $editor->id == $department->editor_id ? 'selected' : '' }}
@@ -61,10 +63,10 @@
                                             <label>كاتب القسم</label>
                                             <select name="writer_id" class="form-control" style="width: 100%;">
                                                 @isset($writers)
-                                                    <option value="0">الكتاب</option>
+                                                    <option value="0"></option>
                                                 @foreach($writers as $writer)
                                                         <option value="{{ $writer->id }}"
-                                                      {{ $writer->id == $department->supervisor_id ? 'selected' : '' }}
+                                                      {{ $writer->id == $department->writer_id ? 'selected' : '' }}
                                                         >{{ $writer->name }}</option>
                                                     @endforeach
                                                 @endisset
@@ -73,18 +75,22 @@
 
 
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label>نوع القسم</label>
                                             <div class="form-group clearfix">
                                                 <div class="icheck-primary d-inline">
-                                                    <input type="radio" id="radioPrimary1" name="type"  value="1"  checked>
+                                                    <input type="radio" id="radioPrimary1" name="type"  value="1"
+                                                    @if($department->parent_id == null) checked @endif
+                                                    >
                                                     <label for="radioPrimary1">
                                                         قسم رئيسى
                                                     </label>
                                                 </div>
 
                                                 <div class="icheck-primary d-inline">
-                                                    <input type="radio" id="radioPrimary3" value="2" name="type">
+                                                    <input type="radio" id="radioPrimary3" value="2" name="type"
+                                                           @if($department->parent_id != null) checked @endif
+                                                    >
                                                     <label for="radioPrimary3">
                                                         قسم فرعى
                                                     </label>
@@ -102,7 +108,9 @@
                                                         <option value="{{ $parent->id }}">{{ $parent->name }}</option>
                                                     @if($child_departs->where('parent_id', $parent->id)->count() > 0)
                                                         @foreach($child_departs->where('parent_id', $parent->id) as $child)
-                                                        <option value="{{ $child->id }}">&nbsp&nbsp&nbsp&nbsp&nbsp*{{ $child->name }}</option>
+                                                        <option value="{{ $child->id }}"
+
+                                                        >&nbsp&nbsp&nbsp&nbsp&nbsp*{{ $child->name }}</option>
                                                          @endforeach
                                                      @endif
                                                 @endforeach
@@ -111,20 +119,17 @@
                                         </div>
 
 
-
-
-
-
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">تعديل</button>
                                     </div>
+                                  </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
 
 
 

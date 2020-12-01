@@ -26,6 +26,10 @@
                                             <label for="exampleInputEmail1">اسم القسم</label>
                                             <input type="text" name="name" class="form-control"  value="{{ old('name') }}"
                                                    placeholder="">
+
+                                            @error('name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group">
@@ -66,7 +70,7 @@
 
 
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label>نوع القسم</label>
                                             <div class="form-group clearfix">
                                                 <div class="icheck-primary d-inline">
@@ -89,7 +93,7 @@
 
                                         <div class="form-group department-menu" style="display: none">
                                             <label>الاقسام</label>
-                                            <select class="form-control select2" style="width: 100%;">
+                                            <select class="form-control" name="parent_id" style="width: 100%;">
                                             @isset($parent_departs)
                                                 @foreach($parent_departs as $parent)
                                                         <option value="{{ $parent->id }}">{{ $parent->name }}</option>
@@ -103,21 +107,18 @@
                                             </select>
                                         </div>
 
-
-
-
-
-
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
+                                  </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
 
 
 

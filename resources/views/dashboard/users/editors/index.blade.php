@@ -9,13 +9,13 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h1 class="m-0 text-dark">المحررين</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">لوحه التحكم</a></li>
-                            <li class="breadcrumb-item ">الاقسام</li>
+                            <li class="breadcrumb-item "><a href="#">الاقسام</a></li>
                             <li class="breadcrumb-item active">المحررين</li>
                         </ol>
                     </div><!-- /.col -->
@@ -25,28 +25,17 @@
         <!-- /.content-header -->
 
         <!-- /.row -->
-        <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">جدول المحررين</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">جدول المحررين</h3>
                     </div>
-                    <!-- /.card-header -->
+                    <!-- /.box-header -->
 
                     @include('dashboard.includes.alerts.success')
                     @include('dashboard.includes.alerts.errors')
 
-                    <div class="card-body table-responsive p-0">
+                    <div class="box-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                             <thead>
                             <tr>
@@ -64,8 +53,19 @@
                                      <td>{{ $editor->name }}</td>
                                      <td>{{ $editor->email }}</td>
                                      <td>
-                                         <a class="btn btn-primary" href="{{ route('edit-supervisor', $editor->id) }}">تعديل</a>
-                                         <a class="btn btn-danger" href="{{ route('delete-supervisor', $editor->id) }}">حذف</a>
+
+                                         @if(auth()->user()->hasPermission('editors_update'))
+                                             <a class="btn btn-primary" href="{{ route('edit-editor', $editor->id) }}" >تعديل</a>
+                                         @else
+                                             <a class="btn btn-primary disabled" href="#" >تعديل</a>
+                                         @endif
+
+                                         @if(auth()->user()->hasPermission('editors_delete'))
+                                             <a class="btn btn-danger" href="{{ route('delete-editor', $editor->id) }}" >حذف</a>
+                                         @else
+                                             <a class="btn btn-danger disabled" href="#" >حذف</a>
+                                         @endif
+
                                      </td>
 
                                  </tr>
@@ -74,10 +74,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.card -->
-            </div>
+                <!-- /.box -->
         </div>
         </div>
 

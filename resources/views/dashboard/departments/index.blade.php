@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">الاقسام</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">لوحه التحكم</a></li>
                             <li class="breadcrumb-item active">الاقسام</li>
@@ -24,25 +24,18 @@
         <!-- /.content-header -->
 
         <!-- /.row -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">جدول الاقسام</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h1 class="box-title">جدول الاقسام</h1>
+                </div><!-- /.box-header -->
+                <div class="box-body no-padding">
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
+
+                            @include('dashboard.includes.alerts.success')
+                            @include('dashboard.includes.alerts.errors')
+
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -59,14 +52,31 @@
                             @foreach($departments as $index => $department)
                                  <tr>
                                      <td>{{ $index + 1 }}</td>
-                                     <td>{{ $department->name }}</td>
+                                     <td>{{ $department->name  }}</td>
                                      <td>{{ $department->parent_id == null ? 'قسم رئيسى' : 'قسم فرعى' }}</td>
-                                     <td>{{ $department->supervisor_id }}</td>
-                                     <td>{{ $department->editor_id }}</td>
-                                     <td>{{ $department->writer_id }}</td>
+                                     <td>{{ $department->supervisor_name  }}</td>
+                                     <td>{{ $department->editor_name }}</td>
+                                     <td>{{ $department->writer_name  }}</td>
                                      <td>
-                                         <a class="btn btn-primary" href="{{ route('departments.edit', $department->id) }}">تعديل</a>
-                                         <a class="btn btn-danger" href="{{ route('departments.destroy', $department->id) }}">حذف</a>
+
+                                         @if(auth()->user()->hasPermission('departments_update'))
+                                             <a class="btn btn-primary" href="{{ route('departments.edit', $department->id) }}" >تعديل</a>
+                                         @else
+                                             <a class="btn btn-primary disabled" href="#" >تعديل</a>
+                                         @endif
+
+                                         @if(auth()->user()->hasPermission('departments_delete'))
+                                             <form method="post" action="{{ route('departments.destroy', $department->id) }}"
+                                             style="display: inline-block;"
+                                             >
+                                                 @csrf
+                                                 @method('delete')
+                                                 <input type="submit" class="btn btn-danger" value="حذف">
+                                             </form>
+                                         @else
+                                             <a class="btn btn-primary disabled" href="#" >حذف</a>
+                                         @endif
+
                                      </td>
 
                                  </tr>

@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->longText('content');
             $table->boolean('status');
             $table->string('main_image')->nullable();
-            $table->integer('category_id')->unsigned();
+            $table->integer('department_id')->unsigned();
             $table->integer('editor_id')->unsigned();
             $table->integer('writer_id')->unsigned();
             $table->timestamps();

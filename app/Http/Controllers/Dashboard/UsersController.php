@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:users_create'])->only('addEmployee');
+        $this->middleware(['permission:users_read'])->only(['getSupervisors', 'getEditors', 'getWriters']);
+        $this->middleware(['permission:users_update'])->only(['editSupervisor', 'editEditor', 'editWriter']);
+        $this->middleware(['permission:users_delete'])->only(['deleteSupervisor', 'deleteEditor', 'deleteWriter']);
+    }
+
 
     public function addEmployee() {
         return view('dashboard.users.create');
@@ -75,12 +83,12 @@ class UsersController extends Controller
         return view('dashboard.users.editors.index', compact('editors'));
     }
 
-    public function editEditors($id) {
+    public function editEditor($id) {
         $editor = User::FindOrFail($id);
         return view('dashboard.users.editors.edit', compact('editors'));
     }
 
-    public function updateEditors(CredentialsRequest $request, $id) {
+    public function updateEditor(CredentialsRequest $request, $id) {
 
         $editor = User::FindOrFail($id);
 
@@ -89,7 +97,7 @@ class UsersController extends Controller
         return redirect()->route('get-editors')->with('success', 'تم التعديل بنجاح');
     }
 
-    public function deleteEditors($id) {
+    public function deleteEditor($id) {
 
         $editor = User::FindOrFail($id);
         $editor->delete();
@@ -127,7 +135,7 @@ class UsersController extends Controller
         $writer = User::FindOrFail($id);
         $writer->delete();
 
-        return redirect()->route('get-writers')->with('success', 'تم الحذ بنجاح');
+        return redirect()->route('get-writers')->with('success', 'تم الحذف بنجاح');
 
     }
 

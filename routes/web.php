@@ -52,20 +52,23 @@ Route::group(['namespace' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::post('update-writer/{id}', 'UsersController@updateWriter')->name('update-writer');
     Route::get('delete-writer/{id}', 'UsersController@deleteWriter')->name('delete-writer');
 
-    Route::get('editors', 'UsersController@getEditors')->name('get-editors');
-    Route::get('writers', 'UsersController@getWriters')->name('get-writers');
 
 
+    //Articles Routes
     Route::resource('articles',  'ArticlesController');
+    Route::get('article/images/{id}', 'ArticlesController@getImages')->name('get-images');
+    Route::post('article/images', 'ArticlesController@saveImages')->name('save-images');
+    Route::get('gallery', 'ArticlesController@getGallery')->name('get-gallery');
+
+    Route::get('edit-article-image/{id}', 'ArticlesController@editImage')->name('edit-article-image');
 
 
-    Route::get('/', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard');
+    //dashboard route
+    Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::get('/admin', function () {
-        return view('layouts.admin');
-    });
+
+
+   // Route::get('/admin', 'DashboardController@data');
 
 });
 

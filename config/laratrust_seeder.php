@@ -14,16 +14,24 @@ return [
     'roles_structure' => [
         'admin' => [
             'departments' => 'c,r,u,d',
+            'articles' => 'c,r,u,d',
+            'supervisors' => 'c,r,u,d',
+            'editors' => 'c,r,u,d',
+            'writers' => 'c,r,u,d',
+            'users' => 'c,r,u,d'
         ],
 
         'supervisor' => [
             'departments' => 'r,u,d',
+            'articles' => 'r,u,d',
         ],
+
         'editor' => [
             'departments' => 'r',
+            'articles' => 'r,u,d',
         ],
         'writer' => [
-            'departments' => 'r',
+            'articles' => 'c,r,u,d',
         ],
 
     ],

@@ -16,7 +16,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" method="post" action="{{route('update-supervisor', $writer->id)}}">
+                                <form role="form" method="post" action="{{route('update-writer', $writer->id)}}">
                                     @csrf
 
                                     <input type="hidden" value="{{ $writer->id }}" name="id">

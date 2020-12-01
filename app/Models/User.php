@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
@@ -40,7 +41,12 @@ class User extends Authenticatable
     ];
 
 
-   /* public function departments() {
-        return $this->belongsToMany(Department::class, 'department_user');
-    }*/
+
+    public function isOnline() {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
+
+
+
 }

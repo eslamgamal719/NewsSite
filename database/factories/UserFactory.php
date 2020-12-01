@@ -44,7 +44,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'title' => $faker->name,
         'content' => $faker->paragraph(),    // 1=main department  2=sub-department
         'status' => $faker->randomElement([0, 1]),    // 0=non-active  1=active
-        'category_id' => random_int(1, 5),
+        'department_id' => random_int(1, 5),
         'editor_id' => random_int(1, 5),
         'writer_id' => random_int(1, 5),
     ];

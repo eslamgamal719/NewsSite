@@ -12,11 +12,11 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">انشاء قسم جديد</h3>
+                                    <h3 class="card-title">انشاء مقال جديد</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method="post"  action="{{ route('departments.store') }}">
+                                <form method="post"  action="{{ route('articles.store') }}">
 
                                     @csrf
 
@@ -24,7 +24,7 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">عنوان المقال</label>
-                                            <input type="text" name="name" class="form-control"  value="{{ old('name') }}"
+                                            <input type="text" name="title" class="form-control"  value="{{ old('title') }}"
                                                    placeholder="">
                                         </div>
 
@@ -38,10 +38,9 @@
                                         </div>
 
 
-
-                                        <div class="form-group department-menu" style="display: none">
+                                        <div class="form-group department-menu" >
                                             <label>الاقسام</label>
-                                            <select class="form-control select2" style="width: 100%;">
+                                            <select class="form-control select2" name="department_id" style="width: 100%;">
                                                 @isset($parent_departs)
                                                     @foreach($parent_departs as $parent)
                                                         <option value="{{ $parent->id }}">{{ $parent->name }}</option>
@@ -82,48 +81,28 @@
 
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label
+                                                            for="projectinput1"> المحتوى
+                                                        </label>
+                                                        <textarea name="content" id="description"
+                                                                  class="ckeditor" placeholder="">{{old('content')}}</textarea>
 
-
-                                                            <!-- tools box -->
-                                                            <div class="card-tools">
-                                                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                                                                        title="Collapse">
-                                                                    <i class="fas fa-minus"></i></button>
-                                                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
-                                                                        title="Remove">
-                                                                    <i class="fas fa-times"></i></button>
-                                                            </div>
-                                                            <!-- /. tools -->
-                                                        </div>
-                                                        <!-- /.card-header -->
-                                                        <div class="card-body pad">
-                                                            <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                                            </div>
-                                                        </div>
-
+                                                        @error('content')
+                                                        <span class="text-danger"></span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                <!-- /.col-->
+                                            </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">اضافه صور المقال</button>
                                     </div>
-                                </form>
-                            </div>
+                                 </div>
+                              </form>
+
                         </div>
                     </div>
                 </div>
@@ -147,8 +126,11 @@
                 }
         });
 
+        CKEDITOR.config.language =  "{{ app()->getLocale() }}";
+
 
     </script>
+
 
 @endsection
 

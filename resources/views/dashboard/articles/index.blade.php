@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">الاقسام</h1>
+                        <h1 class="m-0 text-dark">المقالات</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">لوحه التحكم</a></li>
-                            <li class="breadcrumb-item active">الاقسام</li>
+                            <li class="breadcrumb-item active">المقالات</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -23,50 +23,50 @@
         </div>
         <!-- /.content-header -->
 
-        <!-- /.row -->
-        <div class="row">
+
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">جدول الاقسام</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">جميع المقالات</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive p-0">
+                        @if($articles && $articles->count() > 0)
                         <table class="table table-hover text-nowrap">
+
+                            @include('dashboard.includes.alerts.success')
+                            @include('dashboard.includes.alerts.errors')
+
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>الاسم</th>
-                                <th>نوع القسم</th>
-                                <th>المشرف</th>
+                                <th>العنوان</th>
+                                <th>الحاله</th>
+                                <th>القسم</th>
                                 <th>المحرر</th>
                                 <th>الكاتب</th>
+                                <th>كتب فى</th>
                                 <th>الاجراءات</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @foreach($departments as $index => $department)
+                            @foreach($articles as $index => $article)
                                  <tr>
                                      <td>{{ $index + 1 }}</td>
-                                     <td>{{ $department->name }}</td>
-                                     <td>{{ $department->parent_id == null ? 'قسم رئيسى' : 'قسم فرعى' }}</td>
-                                     <td>{{ $department->supervisor_id }}</td>
-                                     <td>{{ $department->editor_id }}</td>
-                                     <td>{{ $department->writer_id }}</td>
+                                     <td>{{ $article->title }}</td>
+                                     <td>{{ $article->getActive()}}</td>
+                                     <td>{{ $article->department_name }}</td>
+                                     <td>{{ $article->editor_name }}</td>
+                                     <td>{{ $article->writer_name }}</td>
+                                     <td>{{ $article->created_at }}</td>
                                      <td>
-                                         <a class="btn btn-primary" href="{{ route('departments.edit', $department->id) }}">تعديل</a>
-                                         <a class="btn btn-danger" href="{{ route('departments.destroy', $department->id) }}">حذف</a>
+                                         <a class="btn btn-primary" href="{{ route('articles.edit', $article->id) }}">تعديل</a>
+                                         <form method="post" action="{{ route('articles.destroy', $article->id) }}" style="display: inline-block">
+                                             @csrf
+                                             @method('delete')
+                                             <input type="submit" value="حذف" class="btn btn-danger">
+                                         </form>
                                      </td>
 
                                  </tr>
@@ -74,11 +74,14 @@
 
                             </tbody>
                         </table>
+                         @else
+                             <h3>There is no articles</h3>
+                        @endif
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.card -->
-            </div>
+                <!-- /.box -->
+
         </div>
         </div>
 

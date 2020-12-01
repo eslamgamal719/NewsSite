@@ -24,7 +24,7 @@ class DepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:departments,name,' .$this->id,
             'supervisor_id' => 'nullable',
             'editor_id' => 'nullable',
             'writer_id' => 'nullable'

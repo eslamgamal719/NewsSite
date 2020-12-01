@@ -65,48 +65,18 @@
                                             </select>
                                         </div>
 
-{{--
-                                        <div class="form-group">
-                                            <label>الصلاحيات</label>
-                                            <div class="nav-tabs-custom">
 
-                                                @php
-                                                    $models = ['departments'];
-                                                    $maps = ['create', 'read', 'update', 'delete'];
-                                                @endphp
-
-                                                <ul class="nav nav-pills ml-auto p-2">
-                                                    @foreach($models as $index => $model)
-                                                        <li class="nav-item">
-                                                            <a class="nav-link {{ $index == 0 ? 'active' : '' }}" href="#{{$model}}" data-toggle="tab">{{$model}}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-
-                                                <div class="tab-content">
-                                                    @foreach($models as $index=>$model)
-                                                        <div class="tab-pane {{$index == 0 ? 'active' : ''}}" id="{{$model}}">
-
-                                                            @foreach($maps as $map)
-                                                                <label><input type="checkbox" name="permissions[]"
-                                                                              value="{{$model . '_' . $map}}">{{$map}}</label>
-                                                            @endforeach
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-
-                                            </div>
-                                        </div> --}}
 
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">حفظ</button>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
+                                  </div>
+                            </form>
                     </div>
                 </div>
+               </div>
+            </div>
             </div>
 
 
