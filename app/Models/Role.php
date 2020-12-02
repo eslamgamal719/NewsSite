@@ -8,7 +8,5 @@ class Role extends LaratrustRole
 {
     public $guarded = [];
 
-    public function permissions() {
-        return $this->belongsToMany(Permission::class, 'permission_role');
-    }
+
 }

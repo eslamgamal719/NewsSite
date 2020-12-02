@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Image;
 use App\Models\Article;
 use App\Models\Department;
-use App\Models\Image;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+
 
 class ArticlesController extends Controller
 {
@@ -21,6 +22,7 @@ class ArticlesController extends Controller
         $this->middleware(['permission:articles_delete'])->only('destroy');
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +33,7 @@ class ArticlesController extends Controller
         $articles = Article::all();
         return view('dashboard.articles.index', compact('articles'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,6 +50,8 @@ class ArticlesController extends Controller
 
         return view('dashboard.articles.create', $data);
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -65,6 +70,7 @@ class ArticlesController extends Controller
     {
         return view('dashboard.articles.image', compact('article_id'));
     }
+
 
     public function saveImages(Request $request)
     {
@@ -88,6 +94,8 @@ class ArticlesController extends Controller
     }
 
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,6 +113,7 @@ class ArticlesController extends Controller
 
         return view('dashboard.articles.edit', $data);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -126,6 +135,7 @@ class ArticlesController extends Controller
         return view('dashboard.articles.images.editImages', compact(['images', 'article_id']));
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -141,4 +151,5 @@ class ArticlesController extends Controller
 
         return redirect()->route('articles.index')->with(['success' => 'تم الحذف بنجاح']);
     }
+
 }

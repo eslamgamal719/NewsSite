@@ -14,6 +14,7 @@ class Article extends Model
         'writer_name',
     ];
 
+
     //mutators
     public function getDepartmentNameAttribute() {
         $department = Department::where('id', $this->department_id)->first();
@@ -30,7 +31,17 @@ class Article extends Model
         return $user->name;
     }
 
+
+
+    //methods
     public function getActive() {
         return $this->status == 1 ? "فعال" : "غير فعال";
+    }
+
+
+
+    //Relations
+    public function images() {
+        return $this->hasMany(Image::class, 'article_id');
     }
 }

@@ -11,6 +11,7 @@ class Image extends Model
     protected $appends = ['image_url'];
 
 
+    //Mutators
     public function getImageUrlAttribute() {
         return asset('images/' . $this->image);
     }

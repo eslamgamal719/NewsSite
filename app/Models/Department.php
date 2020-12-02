@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Department extends Model implements Auditable
+class Department extends Model
 {
 
-    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'name',
@@ -56,7 +54,6 @@ class Department extends Model implements Auditable
     public function parent() {
         return $this->belongsTo(self::class, 'parent_id');
     }
-
 
 
 

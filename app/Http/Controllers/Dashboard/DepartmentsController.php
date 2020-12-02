@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Requests\Dashboard\DepartmentRequest;
-use App\Models\Article;
 use App\Models\User;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\DepartmentRequest;
 
 
 class DepartmentsController extends Controller
@@ -21,6 +20,7 @@ class DepartmentsController extends Controller
         $this->middleware(['permission:departments_delete'])->only('destroy');
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +31,7 @@ class DepartmentsController extends Controller
         $departments = Department::all();
         return view('dashboard.departments.index', compact('departments'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,12 +45,12 @@ class DepartmentsController extends Controller
         $data['editors'] = User::whereRoleIs('editor')->get();
         $data['supervisors'] = User::whereRoleIs('supervisor')->get();
 
-
         $data['parent_departs'] = Department::where('parent_id', null)->get();
         $data['child_departs'] = Department::where('parent_id', '!=' , null)->get();
 
         return view('dashboard.departments.create', $data);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -86,6 +87,7 @@ class DepartmentsController extends Controller
 
         $data['parent_departs'] = Department::where('parent_id', null)->get();
         $data['child_departs'] = Department::where('parent_id', '!=' , null)->get();
+
         return view('dashboard.departments.edit', $data);
     }
 
@@ -106,6 +108,7 @@ class DepartmentsController extends Controller
 
         return redirect()->route('departments.index')->with('success', 'تم تعديل القسم بنجاح');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\CredentialsRequest;
-use App\Http\Requests\Dashboard\UsersRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\UsersRequest;
+use App\Http\Requests\Dashboard\CredentialsRequest;
+
 
 class UsersController extends Controller
 {
@@ -22,6 +22,7 @@ class UsersController extends Controller
     public function addEmployee() {
         return view('dashboard.users.create');
     }
+
 
     public function postAddEmployee(UsersRequest $request) {
 
@@ -43,6 +44,7 @@ class UsersController extends Controller
         }
 
     }
+
 
 
 
@@ -77,6 +79,7 @@ class UsersController extends Controller
 
 
 
+
     //Editors Methods
     public function getEditors() {
         $editors = User::whereRoleIs('editor')->get();
@@ -105,7 +108,6 @@ class UsersController extends Controller
         return redirect()->route('get-editors')->with('success', 'تم الحذف بنجاح');
 
     }
-
 
 
 

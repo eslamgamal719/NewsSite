@@ -39,7 +39,7 @@
                                     <a href="{{ $image->image_url }}" data-toggle="lightbox" data-title="sample 3 - red"
                                        data-gallery="gallery">
                                         <img src="{{ $image->image_url }}" class="img-fluid mb-2 img-thumbnail"
-                                             height="50px" alt="red sample"/>
+                                              alt="red sample"/>
                                     </a>
                                 </div>
                             @endforeach
