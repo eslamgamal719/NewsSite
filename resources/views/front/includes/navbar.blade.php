@@ -26,6 +26,7 @@
             </ul>
 
             <div class="search m-auto " style="padding-left: 80px !important;">
+                <i class="fas fa-search fa-2x" style="color: #022f66;"></i>
             </div>
         </div>
 </nav>

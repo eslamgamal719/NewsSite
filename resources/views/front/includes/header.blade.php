@@ -34,6 +34,7 @@
                 <div class="col-md-6 text-white" style="line-height: 100px;"><a href="#" style="display: inline-block;"><img src="{{asset('assets/front/img/logo.png')}}" height="130" width="170"></a>تجريبي</div>
                 <div class="col-md-6 text-left">
                     <div class="live" style="color: #fff; display: inline-block; margin-right: 50%; text-align: center; margin-top: 20px;">
+                        <i class="fas fa-tv fa-2x text-danger" style="font-size: 30px;"></i>
                         <h5>بث مباشر</h5>
                     </div>
                 </div>

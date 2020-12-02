@@ -9,7 +9,7 @@
     <div class="row mb-3">
         <div class="col-md-8 pb-4">
             <div class="main-news">
-                <a href="">
+                <a href="{{ route('content', $article->id) }}">
                     <div class="img-main-news">
                         <img src="{{ $article->images->first()->image_url }}" alt="" class="w-100" height="430">
                     </div>
